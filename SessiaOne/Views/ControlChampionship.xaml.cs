@@ -36,7 +36,7 @@ namespace SessiaOne.Views
             tableAdapterForCompetention.Fill(competentionRows);
 
             gridChampionship.Items.Clear();
-            gridChampionship.ItemsSource = competentionRows;
+            gridChampionship.ItemsSource = competentionRows.Reverse();
 
         }
 
@@ -56,7 +56,7 @@ namespace SessiaOne.Views
                     DataSet.competentionRow competentionDataGridRow = (grid.SelectedItem as System.Data.DataRowView).Row as DataSet.competentionRow;
 
                     ChampionshipInformation championshipInformationWindow = new ChampionshipInformation(competentionDataGridRow);
-                    championshipInformationWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                    championshipInformationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     championshipInformationWindow.Show();
                 }
             }
@@ -72,7 +72,7 @@ namespace SessiaOne.Views
                 {
                     DataSet.competentionRow competentionDataGridRow = (grid.SelectedItem as System.Data.DataRowView).Row as DataSet.competentionRow;
 
-                    contentControl = new ControlChampionshipSettings(contentControl, competentionDataGridRow);
+                    contentControl.Content = new ControlChampionshipSettings(contentControl, competentionDataGridRow);
                 }
             }
         }

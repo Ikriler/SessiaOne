@@ -112,7 +112,7 @@ namespace SessiaOne
 
         private void openWindow(Window window)
         {
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.Show();
             this.Close();
         }

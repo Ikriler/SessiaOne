@@ -20,17 +20,12 @@ namespace SessiaOne.Models
 
         public static int getCountSkillsByCompetentionId(int id)
         {
-            competention_skillTableAdapter competention_SkillTableAdapter = new competention_skillTableAdapter();
-            DataSet.competention_skillDataTable competention_SkillRows = new DataSet.competention_skillDataTable();
-
-            competention_SkillTableAdapter.Fill(competention_SkillRows);
-
-            int count = competention_SkillRows.Where(dataBaseCompetention_Skill => dataBaseCompetention_Skill.competention_id == id).Count();
+            int count = CompetentionSkill.initCompetentionSkillDataTable().Where(dataBaseCompetention_Skill => dataBaseCompetention_Skill.competention_id == id).Count();
 
             return count;
         }
 
-        private static DataSet.competentionDataTable initCompetentionDataTable()
+        public static DataSet.competentionDataTable initCompetentionDataTable()
         {
             competentionTableAdapter competentionTableAdapter = new competentionTableAdapter();
             DataSet.competentionDataTable competentionRows = new DataSet.competentionDataTable();
@@ -40,5 +35,19 @@ namespace SessiaOne.Models
             return competentionRows;
         }
 
+
+        public static void insertCompetention(string title, DateTime date_start, DateTime date_end, string description, string city, byte[] image, List<DataSet.skillRow> skillRows)
+        {
+            competentionTableAdapter competentionTableAdapter = new competentionTableAdapter();
+
+            int competention_id = competentionTableAdapter.InsertCompetention(title, date_start, date_end, description, city, image);
+
+            competention_skillTableAdapter competention_SkillTableAdapter = new competention_skillTableAdapter();
+
+            foreach (DataSet.skillRow skillRow in skillRows)
+            {
+                competention_SkillTableAdapter.Insert(competention_id, skillRow.id);
+            }
+        }
     }
 }

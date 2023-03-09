@@ -38,5 +38,14 @@ namespace SessiaOne.Models
 
             return count;
         }
+
+        public static List<DataSet.usersRow> getUsersByRole(DataSet.rolesRow role)
+        {
+            DataSet.usersDataTable users = initUsersDataTable();
+
+            List<DataSet.usersRow> usersList = users.Where(u => u.role_id.Equals(role.id)).ToList();
+
+            return usersList;
+        }
     }
 }

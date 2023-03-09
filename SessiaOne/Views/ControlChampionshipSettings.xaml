@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SessiaOne.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="White" BorderBrush="LimeGreen" BorderThickness="2" CornerRadius="90">
+    <Border Background="White" BorderBrush="LimeGreen" BorderThickness="2" CornerRadius="45">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -16,17 +16,17 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition />
                 <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="buttonAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="19" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4">
+            <Button x:Name="buttonAdd" Content="Добавить" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4" Click="buttonAdd_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -34,7 +34,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="buttonChange" Content="Изменить" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" FontSize="19" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4">
+            <Button x:Name="buttonChange" Content="Изменить" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -50,8 +50,8 @@
                 </DatePicker.Resources>
             </DatePicker>
 
-            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Даты чемпионата" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17">
-                
+            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Даты чемпионата" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10">
+
             </Label>
 
             <DatePicker x:Name="date_end" Grid.Row="1" Grid.Column="3" BorderBrush="LimeGreen" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="Дата начала">
@@ -62,11 +62,13 @@
                 </DatePicker.Resources>
             </DatePicker>
 
-            <Image Source="/Images/wsrlogo-01.png" Grid.Row="1" Grid.Column="4">
-                
-            </Image>
+            <Button x:Name="changeLogoButton" Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Background="Transparent" BorderBrush="Transparent" Margin="0 15 15 0" Click="changeLogoButton_Click">
+                <Image x:Name="logo" Source="/Images/wsrlogo-03.png">
 
-            <TextBox x:Name="title" Grid.Row="2" Grid.Column="0" BorderBrush="LimeGreen" BorderThickness="2" Grid.ColumnSpan="4" Text="Название чемпионата" FontSize="20" VerticalContentAlignment="Center" TextWrapping="Wrap">
+                </Image>
+            </Button>
+
+            <TextBox x:Name="title" Grid.Row="2" Grid.Column="0" BorderBrush="LimeGreen" BorderThickness="2" LostFocus="numberFiled_LostFocus" GotFocus="numberFiled_GotFocus" Grid.ColumnSpan="4" Text="Название чемпионата" FontSize="10" VerticalContentAlignment="Center" TextWrapping="Wrap">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"></Setter>
@@ -74,7 +76,7 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <TextBox x:Name="area" Grid.Row="2" Grid.Column="4" BorderBrush="LimeGreen" BorderThickness="2" Text="S чемпионата" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20">
+            <TextBox x:Name="area" Grid.Row="2" Grid.Column="4" BorderBrush="LimeGreen" BorderThickness="2" KeyUp="area_KeyUp" LostFocus="numberFiled_LostFocus" GotFocus="numberFiled_GotFocus" KeyDown="numberFiled_KeyDown" Text="S чемпионата" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="10">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"></Setter>
@@ -83,16 +85,75 @@
             </TextBox>
 
 
-            <Border x:Name="borderComboExpert" Grid.Row="3" BorderBrush="LimeGreen" BorderThickness="2" Margin="3" CornerRadius="15" Background="White">
+            <Border x:Name="borderComboCompetention" Grid.Row="3" BorderBrush="LimeGreen" BorderThickness="2" Margin="3" CornerRadius="10" Background="White">
 
             </Border>
 
-            <ComboBox Grid.Row="3" Margin="4" Background="White" >
+            <ComboBox x:Name="skills_combobox" FontSize="8" Grid.Row="3" Margin="4" Background="White" SelectedIndex="0" DisplayMemberPath="title">
+                <ComboBox.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=borderComboCompetention}"></VisualBrush>
+                </ComboBox.OpacityMask>
+            </ComboBox>
+
+            <Border x:Name="borderComboExpert" Grid.Row="3" Grid.Column="1" BorderBrush="LimeGreen" BorderThickness="2" Margin="3" CornerRadius="10" Background="White">
+
+            </Border>
+
+            <ComboBox x:Name="main_expert_combobox" FontSize="8" Text="Главный эксперт" SelectedIndex="0" Grid.Row="3" Grid.Column="1" Margin="4" Background="White" DisplayMemberPath="fio">
                 <ComboBox.OpacityMask>
                     <VisualBrush Visual="{Binding ElementName=borderComboExpert}"></VisualBrush>
                 </ComboBox.OpacityMask>
             </ComboBox>
 
+            <TextBox x:Name="countExperts" Grid.Row="3" Grid.Column="2"  BorderBrush="LimeGreen" LostFocus="numberFiled_LostFocus" GotFocus="numberFiled_GotFocus" KeyDown="numberFiled_KeyDown" BorderThickness="2" Text="Кол-во экспертов" FontSize="10" VerticalContentAlignment="Center" TextWrapping="Wrap">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"></Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <TextBox x:Name="countMembers" Grid.Row="3" Grid.Column="3" BorderBrush="LimeGreen" LostFocus="numberFiled_LostFocus" GotFocus="numberFiled_GotFocus" KeyDown="numberFiled_KeyDown" BorderThickness="2" Text="Кол-во участников" FontSize="10" VerticalContentAlignment="Center" TextWrapping="Wrap">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"></Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <TextBox x:Name="space" Grid.Row="3" Grid.Column="4" BorderBrush="LimeGreen" BorderThickness="2" KeyUp="area_KeyUp" LostFocus="numberFiled_LostFocus" GotFocus="numberFiled_GotFocus" KeyDown="numberFiled_KeyDown" Text="S зона" FontSize="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" TextWrapping="Wrap" Grid.ColumnSpan="2">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"></Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label x:Name="totalArea_label" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="2" Content="Общая площадь S: 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="13">
+
+            </Label>
+
+
+            <Button x:Name="skill_add" Content="+" HorizontalAlignment="Center" Padding="5 0" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="10" BorderBrush="LimeGreen" BorderThickness="2" Click="skill_add_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="5" FontSize="10" Grid.ColumnSpan="5" Grid.RowSpan="2" SelectionMode="Single" CanUserAddRows="False" IsReadOnly="True" Margin="10 0" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Binding="{Binding Path=id}" Visibility="Hidden"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=title}"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Path=description}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="delete_menu_item"  Header="Удалить" Click="delete_menu_item_Click"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </Grid>
     </Border>
 </UserControl>
