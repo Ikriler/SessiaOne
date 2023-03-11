@@ -53,7 +53,7 @@ namespace SessiaOne.Views
 
                 if (grid != null && grid.SelectedItem != null && grid.SelectedItems.Count == 1)
                 {
-                    DataSet.competentionRow competentionDataGridRow = (grid.SelectedItem as System.Data.DataRowView).Row as DataSet.competentionRow;
+                    DataSet.competentionRow competentionDataGridRow = grid.SelectedItem as DataSet.competentionRow;
 
                     ChampionshipInformation championshipInformationWindow = new ChampionshipInformation(competentionDataGridRow);
                     championshipInformationWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -70,7 +70,7 @@ namespace SessiaOne.Views
 
                 if (grid != null && grid.SelectedItem != null && grid.SelectedItems.Count == 1)
                 {
-                    DataSet.competentionRow competentionDataGridRow = (grid.SelectedItem as System.Data.DataRowView).Row as DataSet.competentionRow;
+                    DataSet.competentionRow competentionDataGridRow = grid.SelectedItem as DataSet.competentionRow;
 
                     contentControl.Content = new ControlChampionshipSettings(contentControl, competentionDataGridRow);
                 }

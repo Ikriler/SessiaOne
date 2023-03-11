@@ -34,7 +34,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="buttonChange" Content="Изменить" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4">
+            <Button x:Name="buttonChange" Content="Изменить" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="10" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4" Click="buttonChange_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="7"/>
