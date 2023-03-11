@@ -9,10 +9,11 @@ namespace SessiaOne.Models
 {
     internal class Skill
     {
+        public static DataSet.skillDataTable skillDataTable;
         public static DataSet.skillDataTable initSkillDataTable()
         {
             skillTableAdapter skillTableAdapter = new skillTableAdapter();
-            DataSet.skillDataTable skillDataTable = new DataSet.skillDataTable();
+            skillDataTable = new DataSet.skillDataTable();
 
             skillTableAdapter.Fill(skillDataTable);
 
@@ -21,12 +22,32 @@ namespace SessiaOne.Models
 
         public static DataSet.skillRow getSkillByTitle(string title)
         {
-            DataSet.skillDataTable skillDataTable = initSkillDataTable();
+            skillDataTable = skillDataTable ?? initSkillDataTable();
 
             DataSet.skillRow skillRow = skillDataTable.Where(s => s.title.Equals(title)).FirstOrDefault();
 
             return skillRow;
         }
 
+
+        public static string getTitleSkillById(int skill_id)
+        {
+            skillDataTable = skillDataTable ?? initSkillDataTable();
+
+            DataSet.skillRow skillRow = skillDataTable.Where(s => s.id.Equals(skill_id)).FirstOrDefault();
+
+            string title = skillRow != null ? skillRow.title : "";
+
+            return title;
+        }
+
+        public static List<string> getSkillsTitles()
+        {
+            skillDataTable = skillDataTable ?? initSkillDataTable();
+
+            List<string> titles = skillDataTable.Select(s => s.title).ToList();
+
+            return titles;
+        }
     }
 }

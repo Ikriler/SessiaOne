@@ -6,7 +6,82 @@
              xmlns:local="clr-namespace:SessiaOne.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border x:Name="BorderWindow" CornerRadius="45" BorderBrush="LimeGreen" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="borderMenu" Grid.Row="0" Grid.ColumnSpan="7" CornerRadius="45 45 0 0" BorderBrush="LimeGreen" Background="White"></Border>
+            <Border x:Name="BorderGrid" Grid.Row="1" Grid.ColumnSpan="7" CornerRadius="0 0 45 45" BorderBrush="LimeGreen" Background="Wheat"></Border>
+            <DataGrid x:Name="dataGrid" Grid.Row="1" Grid.ColumnSpan="7" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="    ФИО" Binding="{Binding Path=fio}"/>
+                    <DataGridTextColumn Header="Пол" Binding="{Binding Path=gender}"/>
+                    <DataGridTextColumn Header="Дата рождения" Binding="{Binding Path=db_date}"/>
+                    <DataGridTextColumn Header="Компетенция" Binding="{Binding Path=competention}"/>
+                </DataGrid.Columns>
+                <DataGrid.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=BorderGrid}"></VisualBrush>
+                </DataGrid.OpacityMask>
+            </DataGrid>
+
+            <Button x:Name="reset" Content="Сбросить" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="6" FontSize="10" BorderBrush="Blue" BorderThickness="2" Foreground="White" Background="#486cc4" Click="reset_Click" >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Border x:Name="borderGenderCombo" Grid.Row="0" Grid.Column="5" BorderBrush="LimeGreen" BorderThickness="2" Margin="3" CornerRadius="10" Background="White">
+
+            </Border>
+
+            <ComboBox x:Name="gender_combobox" FontSize="8" SelectedIndex="0" Grid.Row="0" Grid.Column="5" Margin="4" Background="White" SelectionChanged="gender_combobox_SelectionChanged">
+                <ComboBox.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=borderGenderCombo}"></VisualBrush>
+                </ComboBox.OpacityMask>
+            </ComboBox>
+
+            <Border x:Name="borderSkillsCombo" Grid.Row="0" Grid.Column="3" BorderBrush="LimeGreen" BorderThickness="2" Margin="3" CornerRadius="10" Background="White">
+
+            </Border>
+
+            <ComboBox x:Name="skills_combobox" FontSize="8" SelectedIndex="0" Grid.Row="0" Grid.Column="3" Margin="4" Background="White" SelectionChanged="skills_combobox_SelectionChanged">
+                <ComboBox.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=borderSkillsCombo}"></VisualBrush>
+                </ComboBox.OpacityMask>
+            </ComboBox>
+
+            <TextBox x:Name="fio" Grid.Row="0" Grid.Column="1" BorderBrush="LimeGreen" BorderThickness="2" FontSize="10" VerticalContentAlignment="Center" TextWrapping="Wrap" KeyDown="fio_KeyDown">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"></Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="ФИО" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10 0 0 0" FontSize="10">
+
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="4" Content="Пол" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10">
+
+            </Label>
+
+            <Label Grid.Row="0" Grid.Column="2" Content="Компетенция" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10">
+
+            </Label>
+        </Grid>
+    </Border>
 </UserControl>
